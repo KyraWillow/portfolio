@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#06040a">
-<meta name="description" content="Okta Putra Ramadhan — cybersecurity (forensic / blue team) and web developer. Projects, case files, certificates.">
+<meta name="description" content="Okta Putra Ramadhan — cybersecurity (forensic / blue team) and web developer. Projects, labs, certificates.">
 <title>Okta Putra Ramadhan · Cybersecurity & Web Developer</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%99%3C/text%3E%3C/svg%3E">
 <script>
@@ -110,7 +110,7 @@ html.js:not(.reduce) .scan.in{-webkit-mask-position:0 0;mask-position:0 0}
 .now{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ash);padding:12px;margin:-12px -12px 12px;max-width:56ch}
 .pulse{flex:none;width:8px;height:8px;border-radius:50%;background:var(--blood);box-shadow:0 0 0 0 rgba(224,69,94,.6);animation:pulse 2.4s var(--io) infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(224,69,94,0)}100%{box-shadow:0 0 0 0 rgba(224,69,94,0)}}
-h1.name{font-size:clamp(2.4rem,7vw,5rem);line-height:1.05;letter-spacing:-.03em;font-weight:700;white-space:nowrap;
+h1.name{font-size:clamp(1.6rem,4vw,3.2rem);line-height:1.05;letter-spacing:-.03em;font-weight:700;white-space:nowrap;
   text-shadow:0 0 40px rgba(183,156,255,.25)}
 .role{margin-top:20px;font-size:clamp(1.05rem,2vw,1.4rem);color:var(--bone)}
 .tag{margin-top:12px;font-style:italic;color:var(--ash);max-width:48ch}
@@ -364,6 +364,11 @@ td.a{color:var(--moon);white-space:nowrap}
 .pcard p{color:var(--ash);margin:0}
 .pcard .pt{color:var(--bone);font-size:.88rem}
 .pcard .pl{margin-top:auto;padding-top:6px;display:flex;gap:16px;flex-wrap:wrap}
+.role{font-size:clamp(1rem,1.7vw,1.25rem);max-width:36ch;line-height:1.4}
+.ls li .pill{align-self:flex-start;flex:none;white-space:nowrap}
+.ls li>div:first-child{min-width:0;max-width:62ch}
+#certlist{max-width:860px}
+.pcard .pill{flex:none;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -377,7 +382,7 @@ td.a{color:var(--moon);white-space:nowrap}
     </a>
     <nav class="nav" id="nav" aria-label="Sections">
       <span class="ind" id="ind" aria-hidden="true"></span>
-      <a href="#about">About</a><a href="#projects">Projects</a><a href="#writeups">Case files</a>
+      <a href="#about">About</a><a href="#projects">Projects</a>
       <a href="#labs">Labs</a><a href="#toolkit">Toolkit</a><a href="#certs">Certificates</a><a href="#contact">Contact</a>
     </nav>
     <button class="lang" id="lang" type="button">EN</button>
@@ -402,7 +407,7 @@ td.a{color:var(--moon);white-space:nowrap}
           <p class="tag scan" id="tag" style="--d:1.1s"></p>
           <div class="cta-row scan" style="--d:1.3s">
             <a class="btn primary" href="#projects">Projects</a>
-            <a class="btn" href="#writeups">Case files</a>
+            <a class="btn" href="#certs">Certificates</a>
             <a class="btn" href="#contact">Contact</a>
           </div>
         </div>
@@ -442,7 +447,7 @@ td.a{color:var(--moon);white-space:nowrap}
     </div>
   </section>
 
-  <section class="sec" id="writeups">
+  <section class="sec" id="writeups" hidden style="display:none">
     <div class="wrapx">
       <div class="sh scan"><h2>Case files</h2><p>Challenge cases, worked end to end.</p></div>
       <div class="bar2 scan">
@@ -608,9 +613,9 @@ let DATA = {
   labs: {
     tracks: [
       { name:"CyberDefenders", kind:"blue-team challenges", state:"2 solved", tone:"ok",
-        note:"Endpoint and memory forensics. Each solve ends as a writeup.", url:"https://cyberdefenders.org" },
+        note:"Endpoint and memory forensics practice.", url:"https://cyberdefenders.org" },
       { name:"picoCTF", kind:"CTF", state:"ongoing", tone:"ok",
-        note:"General Skills category. Solves get documented while they happen, not after.", url:"https://picoctf.org" }
+        note:"General Skills category.", url:"https://picoctf.org" }
     ],
     bench: [
       { name:"Omarchy Linux", state:"daily", tone:"ok", note:"Main workstation, with a Windows VM when something needs it." },
@@ -687,8 +692,8 @@ let DATA = {
 
 
   log: [
-    { when:"done", text:"Ramnit: solved and written up." },
-    { when:"done", text:"StrelaStealer: solved, writeup in progress." },
+    { when:"done", text:"Ramnit: solved." },
+    { when:"done", text:"StrelaStealer: solved." },
     { when:"done", text:"Three DataCamp SQL courses completed." },
     { when:"done", text:"Null Origin CTF 2026, with a team." },
     { when:"now",  text:"Memory forensics practice with Volatility 3." },
@@ -871,7 +876,7 @@ function observeReveals(root=document, force){
   if (root.classList && root.classList.contains('scan')) io.observe(root);
 }
 
-const SECS = ['about','projects','method','writeups','labs','toolkit','certs','log','contact'];
+const SECS = ['about','projects','method','labs','toolkit','certs','log','contact'];
 const NAMES = { projects:'projects', certs:'certificates', top:'top', about:'about', method:'method', writeups:'case files', labs:'labs', toolkit:'toolkit', log:'log', contact:'contact' };
 function scrollSystems(){
   const bar = $('#bar'), prog = $('#prog'), ind = $('#ind'), ofs = $('#ofs'), ofsec = $('#ofsec'), tl = $('#tl'), steps = $('#steps');
@@ -1100,7 +1105,12 @@ const ID = {
     "dasar jaringan: Packet Tracer, ACL, hanya lewat CLI",
     "web development: JavaScript dan sistem untuk pengguna nyata"
   ],
-  labs: { bench: [
+  labs: { tracks: [
+    { name:"CyberDefenders", kind:"tantangan blue-team", state:"2 selesai", tone:"ok", note:"Latihan endpoint dan memory forensics.", url:"https://cyberdefenders.org" },
+    { name:"picoCTF", kind:"CTF", state:"berjalan", tone:"ok", note:"Kategori General Skills.", url:"https://picoctf.org" }
+  ], repos: [
+    { name:"nn-from-scratch", lang:"JavaScript", note:"Neural network yang dibangun dari nol, tanpa library.", url:"https://github.com/KyraWillow/nn-from-scratch" }
+  ], bench: [
     { name:"Omarchy Linux", state:"harian", tone:"ok", note:"Workstation utama, plus VM Windows kalau diperlukan." },
     { name:"NixOS homelab", state:"server utama", tone:"ok", note:"Server berbasis CLI tempat layanan lab berjalan." },
     { name:"Volatility 3", state:"harian", tone:"ok", note:"Sejauh ini pstree, cmdline, malfind, getsids." },
@@ -1119,10 +1129,10 @@ const SEC = [
   ['log','Log','Catatan','No dates, only direction.','Tanpa tanggal, hanya arah.'],
   ['contact','Contact','Kontak','Email is the fastest way to reach me.','Email adalah cara tercepat menghubungi saya.']
 ];
-const NAVIDS = ['about','projects','writeups','labs','toolkit','certs','contact'];
+const NAVIDS = ['about','projects','labs','toolkit','certs','contact'];
 const UI = [
   ['.open',0,'Open to internships · onsite, hybrid, or remote','Terbuka untuk magang · onsite, hybrid, atau remote'],
-  ['.cta-row a',0,'Projects','Proyek'], ['.cta-row a',1,'Case files','Studi kasus'], ['.cta-row a',2,'Contact','Kontak'],
+  ['.cta-row a',0,'Projects','Proyek'], ['.cta-row a',1,'Certificates','Sertifikat'], ['.cta-row a',2,'Contact','Kontak'],
   ['#about h3',0,'What I look at','Yang saya pelajari'],
   ['#labs h3',0,'Practice tracks','Jalur latihan'], ['#labs h3',1,'Side projects','Proyek sampingan'], ['#labs h3',2,'The bench','Perangkat'],
   ['#contact h3',0,'Scope','Cakupan'],
